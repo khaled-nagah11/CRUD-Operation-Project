@@ -11,7 +11,7 @@
             Post Info
         </div>
         <div class="card-body">
-            <h5 class="card-title">{{$post->title}}</h5>
+            <h5 class="card-title">Title: {{$post->title}}</h5>
             <p class="card-text">Description: {{$post->description}}</p>
         </div>
     </div>
@@ -21,9 +21,9 @@
             Post Creator Info
         </div>
         <div class="card-body">
-            <h5 class="card-title">Name: Khaled</h5>
-            <p class="card-text">Email: khaledhsanin188@gmail.com</p>
-            <p class="card-text">Created At: thursday 25th of January 2024 02:45:30 AM</p>
+            <h5 class="card-title">Name: {{$post->user->name}}</h5>
+            <p class="card-text">Email: {{$post->user->email}}</p>
+            <p class="card-text">Created At: {{$post->user->created_at}}</p>
         </div>
     </div>
 

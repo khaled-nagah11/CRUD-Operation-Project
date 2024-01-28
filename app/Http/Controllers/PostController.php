@@ -29,36 +29,45 @@ class PostController extends Controller
 
     public function store()
     {
-        $data= request()->all(); //first examble
         $title = request()->title; //second examble
         $description = request()->description; //second examble
         $postCreator = request()->post_creator; //second examble
-//        dd($data , $title, $description , $postCreator);
 
         Post::create([
             'title' => $title,
-            'description' => $description
+            'description' => $description,
+            'user_id' =>$postCreator
         ]);
         return to_route('posts.index');
     }
 
-    public function edit()
+    public function edit(Post $post)
     {
-        return view('edit');
+        $users = User::all();
+        return view('edit' , ['users' => $users , 'post' => $post]);
     }
 
-    public function update()
+    public function update($postId)
     {
+
         $title = request()->title; //second examble
         $description = request()->description; //second examble
         $postCreator = request()->post_creator; //second examble
-//        dd($title, $description , $postCreator);
 
-        return to_route('posts.show', 1);
+        $singlePostFromDB = Post::find($postId);
+        $singlePostFromDB->update([
+            'title' => $title,
+            'description' => $description,
+            'user_id' => $postCreator
+        ]);
+        return to_route('posts.show', $postId);
     }
 
-    public function destroy()
+    public function destroy($postId)
     {
+
+        $singlePostFromDB = Post::find($postId);
+        $singlePostFromDB->delete();
         return to_route('posts.index');
     }
 
