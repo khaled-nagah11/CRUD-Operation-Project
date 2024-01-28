@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -17,13 +17,14 @@ class PostController extends Controller
 
     public function show($postId)
     {
-        $singlePost = ['id' => 1 , 'title' => 'php' , 'description' => 'this is description' ,'posted_by' => 'Khaled' , 'Created_at' => '2024-1-24 08:30:00'];
-        return view('show', ['post' => $singlePost]) ;
+        $singlePostFromDB = Post::findorfail($postId);
+        return view('show', ['post' => $singlePostFromDB]) ;
     }
 
     public function  create()
     {
-        return view('create');
+        $users = User::all();
+        return view('create', ['users' => $users]);
     }
 
     public function store()
@@ -33,6 +34,11 @@ class PostController extends Controller
         $description = request()->description; //second examble
         $postCreator = request()->post_creator; //second examble
 //        dd($data , $title, $description , $postCreator);
+
+        Post::create([
+            'title' => $title,
+            'description' => $description
+        ]);
         return to_route('posts.index');
     }
 
