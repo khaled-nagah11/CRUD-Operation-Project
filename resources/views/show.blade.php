@@ -21,9 +21,9 @@
             Post Creator Info
         </div>
         <div class="card-body">
-            <h5 class="card-title">Name: {{$post->user->name}}</h5>
-            <p class="card-text">Email: {{$post->user->email}}</p>
-            <p class="card-text">Created At: {{$post->user->created_at}}</p>
+            <h5 class="card-title">Name: {{$post->user ?$post->user->name : 'Not Found'}}</h5>
+            <p class="card-text">Email: {{$post->user ?$post->user->email : 'Not Found'}}</p>
+            <p class="card-text">Created At: {{$post->user ?$post->user->created_at : 'Not Found'}}</p>
         </div>
     </div>
 
