@@ -57,6 +57,12 @@ class PostController extends Controller
     public function update($postId)
     {
 
+        request()->validate([
+            'title'=>['required', 'min:3'],
+            'description'=>['required', 'min:5'],
+            'post_creator'=>['required', 'exists:users,id']
+        ]);
+
         $title = request()->title; //second examble
         $description = request()->description; //second examble
         $postCreator = request()->post_creator; //second examble
