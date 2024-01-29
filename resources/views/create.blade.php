@@ -21,12 +21,12 @@
         @csrf
         <div class="mb-3">
             <label class="form-label">Title</label>
-            <input name="title" type="text" class="form-control">
+            <input name="title" type="text" value="{{old('title')}}" class="form-control">
         </div>
 
         <div class="mb-3">
             <label class="form-label">Description</label>
-            <textarea name="description" class="form-control" rows="3"></textarea>
+            <textarea name="description" class="form-control" rows="3">{{old('description')}}</textarea>
         </div>
 
         <div class="mb-3">
